@@ -9,6 +9,7 @@ wheels/
 # Virtual environments
 .venv
 
+.gitignore
 pyproject.toml
 .python-version
 uv.lock
